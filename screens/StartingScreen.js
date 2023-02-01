@@ -13,24 +13,33 @@ export default function StartingScreen() {
   // const [enteredText, setEnteredText] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [errorEmail, setErrorEmail] = useState('');
+  const [errorPhone, setErrorPhone] = useState('');
   const onSignIn = (e) => {
     const emailFlag = checkEmail(email);
     const numberFlag = checkNumber(phone);
+    
 
     if (emailFlag) {
-      console.log(true)
+      setErrorEmail("");
     }
     else {
-      console.log(false)  
+      setErrorEmail("enter valid email");
+      console.log("email valid");
+       
     }
 
     if (numberFlag) {
-      console.log(true)
+      setErrorPhone("");
     }
     else {
-      console.log(false)
-      
+      setErrorPhone("enter valid phone number");    
     }
+  }
+
+  const onReset=(e)=>{
+    setEmail('');
+    setPhone('');
   }
 
   function changeEmail(enteredEmail){
@@ -42,7 +51,7 @@ export default function StartingScreen() {
   }
 
   function checkEmail(text) {
-    console.log(text);
+    console.log("email: ", text);
     if (/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(text)) {
       return true;
     }
@@ -62,17 +71,16 @@ export default function StartingScreen() {
       <Header appName="Sign up"/>
       <Card style={styles.cardContainer}>
         <Lable>Email address</Lable>
-        <Input sendChangedText={changeEmail}
-          
-        
-        />
+        <Input sendChangedText={changeEmail}/>
+        {errorEmail !== '' && <Text style={styles.message}>{errorEmail}</Text>}
         <Lable>Phone number</Lable>
         <Input sendChangedText={changePhone}/>
+        {errorPhone !== '' && <Text style={styles.message}>{errorPhone}</Text>}
         <View style={styles.buttonContainer}>
-          <Button title="Reset" color={colors.errorColor}  
+          <Button title="Reset" color={colors.errorColor} 
+            onPress={onReset}
               />
           <Button title="Sign in"  
-                // check if it is valid input
                 // if valid save the data and return to the confirm screen
                 onPress={onSignIn}
               />
@@ -114,6 +122,10 @@ const styles = StyleSheet.create({
 
   message:{
     color: colors.errorColor,
+    alignItems:'center',
+    justifyContent: 'center',
+    padding:10,
+    marginLeft: 15,
   },
 });
 
