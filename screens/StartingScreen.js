@@ -9,25 +9,36 @@ import Input from '../components/Input';
 import PhoneInput from '../components/PhoneInput';
 import EmailInput from '../components/EmailInput';
 
-
-
-export default function StartingScreen(sendEmail) {
+export default function StartingScreen() {
   // const [enteredText, setEnteredText] = useState("");
   const [email, setEmail] = useState("");
-
+  const [phone, setPhone] = useState("");
   const onSignIn = (e) => {
     const emailFlag = checkEmail(email);
-    // const numberFlag = checkNumber(numberText);
+    const numberFlag = checkNumber(phone);
 
-    if (emailFlag ) {
-      // setScreen("confirm");
+    if (emailFlag) {
+      console.log(true)
+    }
+    else {
+      console.log(false)  
+    }
+
+    if (numberFlag) {
       console.log(true)
     }
     else {
       console.log(false)
-      // emailFlag? setShowEmailPrompt(false) : setShowEmailPrompt(true);
-      // numberFlag? setShowPhonePrompt(false) : setShowPhonePrompt(true);
+      
     }
+  }
+
+  function changeEmail(enteredEmail){
+    setEmail(enteredEmail);
+  }
+
+  function changePhone(enteredPhoneNumber){
+    setPhone(enteredPhoneNumber);
   }
 
   function checkEmail(text) {
@@ -39,27 +50,26 @@ export default function StartingScreen(sendEmail) {
   }
 
   function checkNumber(text) {
+    console.log(text);
     if (/^[0-9]*$/.test(text) && text.length == 10) {
       return true;
     }
+    return false;
   }
-
-
 
   return (   
     <View style={styles.container}>
       <Header appName="Sign up"/>
       <Card style={styles.cardContainer}>
         <Lable>Email address</Lable>
-        <EmailInput 
-        value={email} onChangeText={(text) => {
-          sendEmail(text); setEmail(text);}}
+        <Input sendChangedText={changeEmail}
+          
+        
         />
-        {/* <Lable>Phone number</Lable>
-        <PhoneInput /> */}
+        <Lable>Phone number</Lable>
+        <Input sendChangedText={changePhone}/>
         <View style={styles.buttonContainer}>
-          <Button title="Reset"
-              
+          <Button title="Reset" color={colors.errorColor}  
               />
           <Button title="Sign in"  
                 // check if it is valid input

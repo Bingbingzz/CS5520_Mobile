@@ -4,6 +4,7 @@ import { useState } from "react";
 import colors from '../colors';
 
 export default function EmailInput({ value, onChangeText }) {
+    
     return (
       <View style={styles.container}>
         <TextInput

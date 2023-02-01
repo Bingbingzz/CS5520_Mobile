@@ -5,6 +5,7 @@ import colors from './colors';
 import {LinearGradient} from 'expo-linear-gradient';
 
 export default function App() {
+  
   return (
     <LinearGradient colors={["rgb(255, 215, 245)", 'transparent']}
     style={styles.container}>

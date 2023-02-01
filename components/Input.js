@@ -3,15 +3,12 @@ import React from 'react'
 import colors from '../colors';
 import { useState } from "react";
 
-export default function Input({sendChangedText,sendChangedEmail}) {
+export default function Input({sendChangedText}) {
     const[text, setText]= useState("");
-    const[email, setEmail] = useState("");
 
     function changeText(changedText){
-        setText(changedText);
-    }
-    function changeEmail(changedEmail){
-        setEmail(chagedEmail);
+        setText(changedText);// save it in input
+        sendChangedText(changedText);//send to starting
     }
   return (   
     <View style={styles.container}>
@@ -19,7 +16,6 @@ export default function Input({sendChangedText,sendChangedEmail}) {
           value={text}
           placeholder="Input"
           onChangeText={changeText}
-          onChangedEmail={changeEmail}
         />     
     </View>
   )

@@ -4,6 +4,10 @@ import { useState } from "react";
 import colors from '../colors';
 
 export default function PhoneInput({value, onChangeText }) {
+    function onChangeText(){
+        setText();
+
+    }
     return (
       <View style={styles.container}>
         <TextInput style={styles.input} value={value}
