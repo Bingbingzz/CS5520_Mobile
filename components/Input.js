@@ -3,7 +3,7 @@ import React from 'react'
 import colors from '../colors';
 import { useState } from "react";
 
-export default function Input({sendChangedText,snedChangedEmail}) {
+export default function Input({sendChangedText,sendChangedEmail}) {
     const[text, setText]= useState("");
     const[email, setEmail] = useState("");
 
