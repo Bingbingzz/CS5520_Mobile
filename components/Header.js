@@ -11,12 +11,13 @@ export default function Header({appName}) {
 }
 
 const styles = StyleSheet.create({
-    header:{
+    header:{    
+        alignItems: "center",
         color: colors.primary,
         borderWidth: 2,
         borderColor: colors.primary,
         fontSize: 24,
         padding: 5,
-
+        marginBottom: 20,
     }
 })

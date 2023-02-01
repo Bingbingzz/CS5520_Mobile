@@ -2,15 +2,20 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, SafeAreaView, TextInput } from 'react-native';
 import StartingScreen from './screens/StartingScreen';
 import colors from './colors';
+import {LinearGradient} from 'expo-linear-gradient';
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.container}>
-        <View style={styles.view}>
+    <LinearGradient colors={["rgb(255, 215, 245)", 'transparent']}
+    style={styles.container}>
+       <View style={styles.view}>
           <StartingScreen/>
         </View>     
         <StatusBar style="auto" />
-    </SafeAreaView>  
+
+    </LinearGradient>
+     
+   
   );
 }
 
@@ -19,7 +24,7 @@ const styles = StyleSheet.create({
   display: 'flex',
   flex:1,
   flexDirection: 'row',
-  backgroundColor: colors.primaryContainer,
+  // backgroundColor: colors.primaryContainer,
   alignItems: 'center',
   justifyContent: 'center',
   },
