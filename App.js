@@ -3,9 +3,11 @@ import { StyleSheet, Text, View, Button, SafeAreaView, TextInput } from 'react-n
 import StartingScreen from './screens/StartingScreen';
 import colors from './colors';
 import {LinearGradient} from 'expo-linear-gradient';
-
+import { useState } from 'react';
+//need to sendback ifLoggedin,email,phone
 export default function App() {
   
+
   return (
     <LinearGradient colors={["rgb(255, 215, 245)", 'transparent']}
     style={styles.container}>

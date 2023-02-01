@@ -6,8 +6,7 @@ import Card from '../components/Card';
 import colors from '../colors';
 import Lable from '../components/Lable';
 import Input from '../components/Input';
-import PhoneInput from '../components/PhoneInput';
-import EmailInput from '../components/EmailInput';
+
 
 export default function StartingScreen() {
   // const [enteredText, setEnteredText] = useState("");
@@ -15,9 +14,15 @@ export default function StartingScreen() {
   const [phone, setPhone] = useState("");
   const [errorEmail, setErrorEmail] = useState('');
   const [errorPhone, setErrorPhone] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const onSignIn = (e) => {
     const emailFlag = checkEmail(email);
     const numberFlag = checkNumber(phone);
+    if (numberFlag && emailFlag ){
+      setIsLoggedIn(true);
+      console.log("logged in")
+      //redirect to another screen
+    }
     
 
     if (emailFlag) {
@@ -35,6 +40,8 @@ export default function StartingScreen() {
     else {
       setErrorPhone("enter valid phone number");    
     }
+
+    
   }
 
   const onReset=(e)=>{
@@ -80,7 +87,7 @@ export default function StartingScreen() {
           <Button title="Reset" color={colors.errorColor} 
             onPress={onReset}
               />
-          <Button title="Sign in"  
+          <Button title="Sign up"  
                 // if valid save the data and return to the confirm screen
                 onPress={onSignIn}
               />
