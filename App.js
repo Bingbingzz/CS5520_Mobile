@@ -6,11 +6,13 @@ import {LinearGradient} from 'expo-linear-gradient';
 import { useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import ConfirmScreen from './screens/ConfirmScreen';
+import FinishScreen from './screens/FinishScreen';
 //need to sendback ifLoggedin,email,phone
 export default function App() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isConfirmed, setIsConfirmed] = useState(false);
   // const [confirm, setConfirm] = useState(false);
   function sendEmail(email){
     setEmail(email);
@@ -39,9 +41,11 @@ export default function App() {
           setPhone={setPhone} 
           email={email}
           phone={phone}
+          setIsLoggedIn={setIsLoggedIn}
         />)
         } 
         
+        {/* <FinishScreen isConfirmed={isConfirmed} phone={phone}/> */}
           
           
         </SafeAreaProvider>     
