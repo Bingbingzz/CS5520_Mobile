@@ -13,7 +13,6 @@ export default function StartingScreen({email,phone,setEmail,setPhone,setIsLogge
   const [phoneText, setPhoneText] = useState("");
   const [errorEmail, setErrorEmail] = useState('');
   const [errorPhone, setErrorPhone] = useState('');
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const onSignIn = (e) => {
     const emailFlag = checkEmail(emailText);
     const numberFlag = checkNumber(phoneText);
@@ -41,7 +40,8 @@ export default function StartingScreen({email,phone,setEmail,setPhone,setIsLogge
   const onReset=(e)=>{
     setEmailText('');
     setPhoneText('');
-    console.log("reset");
+    setErrorEmail('');
+    setErrorPhone('');
   }
 
   function changeEmail(enteredEmail){
@@ -86,17 +86,11 @@ export default function StartingScreen({email,phone,setEmail,setPhone,setIsLogge
           onPress={onReset}
             />
         <Button title="Sign up"  
-              // if valid save the data and return to the confirm screen
               onPress={onSignIn}
             />
       </View>
-    </Card>
-    
-  </View>
-
-   
-    
-      
+    </Card>    
+  </View>    
   )
 }
 
@@ -107,9 +101,7 @@ const styles = StyleSheet.create({
   flex:1,
   marginTop: 100,
   alignItems: 'center',
-  // justifyContent: 'center',
   },
-
 
   cardContainer:{
     width: '80%',
@@ -127,7 +119,6 @@ const styles = StyleSheet.create({
     color: colors.primary,
     alignItems: 'center',
   },
-
 
   message:{
     color: colors.errorColor,

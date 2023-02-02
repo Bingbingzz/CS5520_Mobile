@@ -38,20 +38,21 @@ export default function ConfirmScreen({email, phone,setEmail,setPhone,setIsLogge
   return (
     <Modal 
     visible={modalVisible} 
+    animationType="slide"
+    transparent={true}
     >
       <View style={styles.container}>
         <Card style={styles.cardContainer}>
         <Text style={styles.text}>You have entered:</Text>
           <Text style={styles.text}>Email: {email}</Text>
           <Text style={styles.text}>Phone: {phone}</Text>
-          <Text style={styles.text}>Please confirm they are correct</Text>
-          <Button title="Go back" color={colors.errorColor} onPress={goBack}/>
-          <Button title="Confirm"  onPress={confirm}/>
-          <Button title="Finish Later" onPress={finishLater}/>
+          <Text style={styles.text}>Please confirm they are correct:</Text>
+          <Button style = {styles.button} title="Go back" color={colors.errorColor} onPress={goBack}/>
+          <Button style = {styles.button} title="Confirm"  onPress={confirm}/>
+          <Button style = {styles.button} title="Finish Later" onPress={finishLater}/>
         </Card>
         </View>
-    </Modal>  
-    
+    </Modal>     
   )
 }
 
@@ -62,7 +63,6 @@ const styles = StyleSheet.create({
     flex:1,
     marginTop: 100,
     alignItems: 'center',
-    // justifyContent: 'center',
     },
  
     cardContainer:{
@@ -72,11 +72,18 @@ const styles = StyleSheet.create({
     buttonContainer:{
       padding:20,
       justifyContent: 'space-between',
-      width: '100%',
+      width: '30%',
       flexDirection: 'row',
+    },
+
+    button:{
+        padding: 10,
+        marginBottom: 10, 
+        borderRadius: 5,       
     },
   
     text:{
+      marginTop:10,
       fontSize: 20,
       color: colors.primary,
       alignItems: 'center',

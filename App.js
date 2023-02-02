@@ -7,13 +7,12 @@ import { useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import ConfirmScreen from './screens/ConfirmScreen';
 import FinishScreen from './screens/FinishScreen';
-//need to sendback ifLoggedin,email,phone
+
 export default function App() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
-  // const [confirm, setConfirm] = useState(false);
   function sendEmail(email){
     setEmail(email);
   }
@@ -25,8 +24,7 @@ export default function App() {
   return (
     <LinearGradient colors={["rgb(255, 215, 245)", 'transparent']}
     style={styles.container}>
-        <SafeAreaProvider style={styles.view}>
-          {/* <ConfirmScreen/> */}
+        <SafeAreaView style={styles.view}>
         {!isLoggedIn ?(
           <StartingScreen 
           setEmail={sendEmail} 
@@ -44,16 +42,9 @@ export default function App() {
           setIsLoggedIn={setIsLoggedIn}
         />)
         } 
-        
-        {/* <FinishScreen isConfirmed={isConfirmed} phone={phone}/> */}
-          
-          
-        </SafeAreaProvider>     
+        </SafeAreaView>     
         <StatusBar style="auto" />
-
-    </LinearGradient>
-     
-   
+    </LinearGradient> 
   );
 }
 
@@ -62,7 +53,6 @@ const styles = StyleSheet.create({
   display: 'flex',
   flex:1,
   flexDirection: 'row',
-  // backgroundColor: colors.primaryContainer,
   alignItems: 'center',
   justifyContent: 'center',
   },

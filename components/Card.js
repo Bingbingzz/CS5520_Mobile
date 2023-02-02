@@ -18,7 +18,6 @@ const styles=StyleSheet.create({
         shadowColor: colors.onPrimaryContainer,             
         shadowOffset: { width: 3, height: 3 },
         shadowOpacity: 0.2,
-        shadowRadius: 5,
-        // elevation: 5,       
+        shadowRadius: 5,      
     }
 })

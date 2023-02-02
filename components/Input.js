@@ -3,7 +3,6 @@ import React from 'react';
 import colors from '../colors';
 import { useState } from "react";
 
-
 export default function Input({sendChangedText,text}) {
 
     function changeText(changedText){
@@ -36,8 +35,6 @@ const styles=StyleSheet.create({
         borderBottomColor: colors.primary,
         borderBottomWidth: 2,
         width: "80%",
-        // marginVertical: 10,
       }
-
 })
 
