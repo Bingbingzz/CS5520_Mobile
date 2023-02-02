@@ -1,13 +1,13 @@
 import { View, Text, TextInput,StyleSheet } from 'react-native'
-import React from 'react'
+import React from 'react';
 import colors from '../colors';
 import { useState } from "react";
 
-export default function Input({sendChangedText}) {
-    const[text, setText]= useState("");
+
+export default function Input({sendChangedText,text}) {
 
     function changeText(changedText){
-        setText(changedText);// save it in input
+        // setText(changedText);// save it in input
         sendChangedText(changedText);//send to starting
     }
   return (   

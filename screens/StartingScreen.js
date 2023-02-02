@@ -8,30 +8,26 @@ import Lable from '../components/Lable';
 import Input from '../components/Input';
 
 
-export default function StartingScreen() {
-  // const [enteredText, setEnteredText] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+export default function StartingScreen({email,phone,setEmail,setPhone,setIsLoggedIn, isLoggedIn}) {
+  const [emailText, setEmailText] = useState("");
+  const [phoneText, setPhoneText] = useState("");
   const [errorEmail, setErrorEmail] = useState('');
   const [errorPhone, setErrorPhone] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const onSignIn = (e) => {
-    const emailFlag = checkEmail(email);
-    const numberFlag = checkNumber(phone);
+    const emailFlag = checkEmail(emailText);
+    const numberFlag = checkNumber(phoneText);
     if (numberFlag && emailFlag ){
       setIsLoggedIn(true);
       console.log("logged in")
-      //redirect to another screen
     }
     
-
-    if (emailFlag) {
+   if (emailFlag) {
       setErrorEmail("");
     }
     else {
       setErrorEmail("enter valid email");
-      console.log("email valid");
-       
+      console.log("email valid");       
     }
 
     if (numberFlag) {
@@ -39,21 +35,22 @@ export default function StartingScreen() {
     }
     else {
       setErrorPhone("enter valid phone number");    
-    }
-
-    
+    }    
   }
 
   const onReset=(e)=>{
-    setEmail('');
-    setPhone('');
+    setEmailText('');
+    setPhoneText('');
+    console.log("reset");
   }
 
   function changeEmail(enteredEmail){
+    setEmailText(enteredEmail);
     setEmail(enteredEmail);
   }
 
   function changePhone(enteredPhoneNumber){
+    setPhoneText(enteredPhoneNumber);
     setPhone(enteredPhoneNumber);
   }
 
@@ -73,27 +70,32 @@ export default function StartingScreen() {
     return false;
   }
 
-  return (   
-    <View style={styles.container}>
-      <Header appName="Sign up"/>
-      <Card style={styles.cardContainer}>
-        <Lable>Email address</Lable>
-        <Input sendChangedText={changeEmail}/>
-        {errorEmail !== '' && <Text style={styles.message}>{errorEmail}</Text>}
-        <Lable>Phone number</Lable>
-        <Input sendChangedText={changePhone}/>
-        {errorPhone !== '' && <Text style={styles.message}>{errorPhone}</Text>}
-        <View style={styles.buttonContainer}>
-          <Button title="Reset" color={colors.errorColor} 
-            onPress={onReset}
-              />
-          <Button title="Sign up"  
-                // if valid save the data and return to the confirm screen
-                onPress={onSignIn}
-              />
-        </View>
-      </Card>
-    </View>
+  return (
+    
+  <View style={styles.container}>
+    <Header appName="Sign up"/>
+    <Card style={styles.cardContainer}>
+      <Lable>Email address</Lable>
+      <Input sendChangedText={changeEmail} text={emailText}/>
+      {errorEmail !== '' && <Text style={styles.message}>{errorEmail}</Text>}
+      <Lable>Phone number</Lable>
+      <Input sendChangedText={changePhone} text={phoneText}/>
+      {errorPhone !== '' && <Text style={styles.message}>{errorPhone}</Text>}
+      <View style={styles.buttonContainer}>
+        <Button title="Reset" color={colors.errorColor} 
+          onPress={onReset}
+            />
+        <Button title="Sign up"  
+              // if valid save the data and return to the confirm screen
+              onPress={onSignIn}
+            />
+      </View>
+    </Card>
+    
+  </View>
+
+   
+    
       
   )
 }
