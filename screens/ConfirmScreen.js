@@ -5,23 +5,34 @@ import colors from '../colors';
 import Card from '../components/Card';
 import Lable from '../components/Lable';
 import Input from '../components/Input';
+import FinishScreen from './FinishScreen';
 
 export default function ConfirmScreen({email, phone,setEmail,setPhone,setIsLoggedIn}) {
   const [modalVisible, setModalVisible] = useState(true);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [isFinishedLater, setIsFinishedLater] = useState(false);
   
-  const GoBack = () => {
+  const goBack = () => {
     setModalVisible(false);
     setEmail(email);
     setPhone(phone);
     setIsLoggedIn(false);
   }
 
-  const Confirm = () => {
+  const confirm = () => {
     setModalVisible(false);
     setIsConfirmed(true);
     setIsLoggedIn(true);
+  }
+
+  const finishLater=()=>{
+    setModalVisible(false);
+    setIsFinishedLater(true);
+    setIsLoggedIn(true);
+  }
+
+  if (isConfirmed || isFinishedLater) {
+    return <FinishScreen isConfirmed={isConfirmed} phone={phone} setPhone={setPhone} setEmail={setEmail} setIsLoggedIn={setIsLoggedIn}/>
   }
   
   return (
@@ -34,9 +45,9 @@ export default function ConfirmScreen({email, phone,setEmail,setPhone,setIsLogge
           <Text style={styles.text}>Email: {email}</Text>
           <Text style={styles.text}>Phone: {phone}</Text>
           <Text style={styles.text}>Please confirm they are correct</Text>
-          <Button title="Go back" color={colors.errorColor} onPress={GoBack}/>
-          <Button title="Confirm"  onPress={Confirm}/>
-          <Button title="Finish Later" />
+          <Button title="Go back" color={colors.errorColor} onPress={goBack}/>
+          <Button title="Confirm"  onPress={confirm}/>
+          <Button title="Finish Later" onPress={finishLater}/>
         </Card>
         </View>
     </Modal>  

@@ -7,8 +7,7 @@ import Lable from '../components/Lable';
 import Input from '../components/Input';
 
 
-export default function FinishScreen({phone,isConfirmed}) {
-    console.log("FinishScreen:",{isConfirmed});
+export default function FinishScreen({setPhone, setEmail, phone, isConfirmed, setIsLoggedIn}) {
     const img = isConfirmed
     ? {
         uri: `https://picsum.photos/id/${phone[phone.length - 1]}/100/100`,
@@ -19,6 +18,13 @@ export default function FinishScreen({phone,isConfirmed}) {
     ? "Thank you for signing up! Here's a picture based on the last digit of your phone number."
     : "Sorry to see you go.";
     
+    const restart=(e)=>{
+        setEmail('');
+        setPhone('');
+        setIsLoggedIn(false);
+        console.log("restart");
+    }
+
     return (
         <View style={styles.container}>    
           <Card style={styles.cardContainer}>
@@ -29,7 +35,7 @@ export default function FinishScreen({phone,isConfirmed}) {
                     source={img}       
                     />  
                 </View>                   
-              <Button title="Start again"  />
+              <Button title="Start again" onPress={restart} />
           </Card>
         </View>
       );
@@ -44,7 +50,6 @@ const styles = StyleSheet.create({
     flex:1,
     marginTop: 100,
     alignItems: 'center',
-    // justifyContent: 'center',
     },
  
     cardContainer:{
