@@ -19,7 +19,7 @@ export default function GoalItem({ goal, onDelete, onGoalPress }) {
           // }
         }}
         android_ripple={{ color: "red" }}
-        onPress={() => onGoalPress(goal.id)}
+        onPress={() => onGoalPress(goal)}
       >
         <Text style={styles.text}>{goal.text}</Text>
         {/* <Button
