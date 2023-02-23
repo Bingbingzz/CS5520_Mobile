@@ -1,5 +1,7 @@
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { firestore } from "./Firebase/firebase-setup";
+import { collection, onSnapshot, deleteDoc } from "firebase/firestore";
 import {
   Button,
   StyleSheet,
@@ -14,8 +16,30 @@ import GoalDetails from "./components/GoalDetails";
 import GoalItem from "./components/GoalItem";
 import Header from "./components/Header";
 import Input from "./components/Input";
+import { deleteFromDB, writeToDB } from "./Firebase/firestoreHelper";
 
-export default function Home({navigation}) {
+export default function Home({ navigation }) {
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      collection(firestore, "goals"),
+      (querySnapshot) => {
+        if (querySnapshot.empty) {
+          setGoals([]);
+        } else {
+          let goalsFromDB = [];
+          querySnapshot.docs.forEach((snapDoc) => {
+            goalsFromDB.push({ ...snapDoc.data(), id: snapDoc.id });
+          });
+          console.log(goalsFromDB);
+          setGoals(goalsFromDB);
+        }
+      }
+    );
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   const name = "my awesome app";
   // const [enteredText, setEnteredText] = useState("Your goals will appear here");
   const [goals, setGoals] = useState([]);
@@ -24,12 +48,11 @@ export default function Home({navigation}) {
   function onTextEntered(changedText) {
     // setEnteredText(changedText);
     // update goals array with the new text
-    const newGoal = { text: changedText, id: Math.random() };
+    const newGoal = { text: changedText };
+    writeToDB({ goal: changedText });
 
     // const newArray = [...goals, newGoal];
-    setGoals((prevGoals) => {
-      return [...prevGoals, newGoal];
-    });
+
     setModalVisible(false);
   }
 
@@ -42,15 +65,16 @@ export default function Home({navigation}) {
     //   return goal.id !== deletedId;
     // });
     // setGoals(newArray);
-    setGoals((prevGoals) => {
-      return prevGoals.filter((goal) => {
-        return goal.id !== deletedId;
-      });
-    });
+    // setGoals((prevGoals) => {
+    //   return prevGoals.filter((goal) => {
+    //     return goal.id !== deletedId;
+    //   });
+    // });
+    deleteFromDB(deletedId);
   }
   function goalPressed(goal) {
     console.log("pressed ", goal);
-    navigation.navigate("GoalDetails",{goalItem: goal});  
+    navigation.navigate("GoalDetails", { goalItem: goal });
   }
 
   return (

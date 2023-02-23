@@ -24,7 +24,7 @@ export default function App() {
         title: 'All My Goals', 
         headerRight: ()=>{return ( 
         <PressableButton 
-         customizedStyle={{backgroundColor:'red'}}>
+         customizedStyle={{backgroundColor:'transparent'}}>
             <Ionicons name="warning" size={30} color="black" />
         </PressableButton>
         )}
